@@ -1,8 +1,18 @@
 # elearning_project/settings.py
 
-import os # Make sure os is imported at the top
+import os 
+from pathlib import Path
 
-# ... other settings ...
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# SECURITY WARNING: keep the secret key used in production secret! generate a real secret key for production. For development, this is okay.
+SECRET_KEY = 'django-insecure-=your-default-key-here-if-you-remember-it-or-make-one-up-for-now'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True  # Set this to True for development. A PERSONAL REMINDER
+
+ALLOWED_HOSTS = [] 
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,7 +30,7 @@ INSTALLED_APPS = [
     # Your apps
     'users.apps.UsersConfig',
     'courses.apps.CoursesConfig',
-    'comments.apps.CommentConfig',
+    'comments.apps.CommentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -35,15 +45,24 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Database configuration (SQLite for now)
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+# 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files (User uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Creates a 'media' folder in project root
+
+# Database configuration (SQLite???)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3', # BASE_DIR is already defined by Django
+        'NAME': BASE_DIR / 'db.sqlite3', 
     }
 }
 
-# --- Add these new sections at the end of the file ---
+
 
 # Specify the custom user model
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -67,21 +86,11 @@ from datetime import timedelta
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), # Adjust as needed
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    # ... other settings if needed
+    
 }
 
-# CORS settings (Change in production!)
+# CORS settings (To change in production!)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", # Your React development server
     "http://127.0.0.1:3000", # Alternative for localhost
 ]
-# Or for very early development (less secure):
-# CORS_ALLOW_ALL_ORIGINS = True
-
-# --- End of new sections ---
-
-
-# Make sure TEMPLATES, STATIC_URL, etc., are still present
-
-# Set timezone if needed
-# TIME_ZONE = 'UTC'

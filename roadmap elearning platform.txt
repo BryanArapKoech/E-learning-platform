@@ -271,6 +271,90 @@ src/
 └── index.js         # Entry point
 
 
+
+Frontend (React - create-react-app or Vite)
+src/
+├── assets/          # Images, icons, fonts
+├── components/      # Reusable UI elements
+│   ├── common/        # Button, Input, Modal, Spinner, Card
+│   ├── layout/        # Navbar, Footer, Sidebar (Admin)
+│   ├── course/        # CourseCard, CourseList, LessonListItem
+│   ├── auth/          # LoginForm, RegisterForm
+│   ├── player/        # VideoPlayerWrapper
+│   ├── comments/      # CommentForm, CommentList, CommentItem
+│   └── admin/         # AdminCourseForm, StudentProgressTable, QuizEditor
+├── constants/       # API endpoints, maybe roles
+├── contexts/        # AuthContext, maybe ThemeContext
+├── hooks/           # Custom hooks (e.g., useAuth, useApi)
+├── pages/           # Page-level components
+│   ├── HomePage.js
+│   ├── CourseListPage.js
+│   ├── CourseDetailPage.js
+│   ├── LessonPage.js
+│   ├── LoginPage.js
+│   ├── RegisterPage.js
+│   ├── StudentDashboardPage.js
+│   ├── InstructorDashboardPage.js # Could combine w/ Admin
+│   ├── AdminCourseListPage.js
+│   ├── AdminCourseEditPage.js
+│   └── NotFoundPage.js
+├── services/        # API call functions (e.g., authService.js, courseService.js)
+├── styles/          # Global styles, Tailwind config (tailwind.config.js, index.css)
+├── utils/           # Helper functions (date formatting, validation)
+├── App.js           # Main application component with routing setup
+└── index.js         # Entry point
+
+Backend (Django)
+elearning_project/   # Django project root
+│
+├── elearning_project/ # Main project settings
+│   ├── __init__.py
+│   ├── settings.py    # Configure DB, AUTH, MEDIA, CORS, APPS
+│   ├── urls.py        # Root URL configuration
+│   └── wsgi.py/asgi.py
+│
+├── apps/              # Your Django apps directory
+│   ├── users/         # Custom User Model, JWT Views, Serializers
+│   │   ├── models.py    # CustomUser(AbstractUser)
+│   │   ├── serializers.py
+│   │   ├── views.py     # Register, Login (TokenObtainPairView)
+│   │   ├── urls.py
+│   │   └── admin.py
+│   ├── courses/       # Course, Module, Lesson models
+│   │   ├── models.py    # Course, Module, Lesson, ResourceFile
+│   │   ├── serializers.py # CourseSerializer, LessonSerializer etc.
+│   │   ├── views.py     # ModelViewSets for Course, Lesson
+│   │   ├── urls.py
+│   │   └── admin.py
+│   ├── comments/      # Comment model linked to Lesson & User
+│   │   ├── models.py    # Comment(ForeignKey: Lesson, User)
+│   │   ├── serializers.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   └── admin.py
+│   ├── progress/      # Tracking student progress
+│   │   ├── models.py    # StudentProgress(ForeignKey: Student, Lesson, completed: bool), CourseEnrollment
+│   │   ├── serializers.py
+│   │   ├── views.py     # API to mark complete, get progress
+│   │   ├── urls.py
+│   │   └── admin.py
+│   ├── quizzes/       # Quiz, Question, Answer, StudentAttempt (Advanced)
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   └── admin.py
+│   └── certificates/  # Certificate generation/tracking (Advanced)
+│       ├── models.py
+│       ├── services.py  # Logic for PDF generation
+│       ├── views.py
+│       ├── urls.py
+│       └── admin.py
+│
+├── manage.py
+└── requirements.txt   # Python dependencies
+
+
 Backend (Django)
 elearning_project/   # Django project root
 │
